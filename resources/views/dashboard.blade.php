@@ -16,7 +16,7 @@
                     <a href="{{ route('dashboard') }}"
                        class="px-3 py-1.5 rounded-full whitespace-nowrap transition
                               {{ !request('category') ? 'bg-gray-900 text-white' : 'hover:bg-gray-100 text-gray-600' }}">
-                        ????
+                        الكل
                     </a>
                     @foreach($categories as $category)
                         <a href="{{ route('dashboard', ['category' => $category->id]) }}"
@@ -33,7 +33,7 @@
                 @forelse($posts as $post)
                     @include('components.post-card', ['post' => $post])
                 @empty
-                    <p class="text-center text-gray-400 py-16">?? ???? ?????? ?? ??? ?????.</p>
+                    <p class="text-center text-gray-400 py-16">لا توجد مقالات في هذه الفئة.</p>
                 @endforelse
             </div>
 
