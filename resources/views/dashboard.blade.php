@@ -70,11 +70,11 @@
                     <hr class="border-gray-200">
 
                     {{-- Write CTA --}}
-                    <div class="bg-gray-50 rounded-xl p-5">
-                        <p class="text-sm text-gray-700 font-medium mb-1">Writing on Medium</p>
-                        <p class="text-xs text-gray-500 mb-3">New to writing? Start your first story today.</p>
+                    <div style="background:#f9fafb; border-radius:0.75rem; padding:1.25rem;">
+                        <p style="font-size:0.875rem; font-weight:600; color:#374151; margin-bottom:0.25rem;">Writing on Medium</p>
+                        <p style="font-size:0.75rem; color:#6b7280; margin-bottom:0.9rem;">New to writing? Start your first story today.</p>
                         <a href="{{ route('posts.create') }}"
-                           class="inline-block px-4 py-2 bg-gray-900 text-white text-xs font-semibold rounded-full hover:bg-gray-700 transition">
+                           style="display:inline-block; padding:0.45rem 1rem; background:#111827; color:#fff; border-radius:9999px; font-size:0.75rem; font-weight:600; text-decoration:none;">
                             Start writing
                         </a>
                     </div>

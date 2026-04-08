@@ -2,20 +2,22 @@
     <x-slot name="title">Discover great stories</x-slot>
 
     <!-- Hero -->
-    <div class="bg-yellow-300 border-b-2 border-gray-900">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col sm:flex-row items-center justify-between gap-10">
+    <div style="background-color:#fef08a; border-bottom:2px solid #111827;">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8" style="padding-top:5rem; padding-bottom:5rem; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:3rem;">
             <div>
-                <h1 class="text-6xl font-bold text-gray-900 leading-none tracking-tight">Human<br>stories &amp;<br>ideas</h1>
-                <p class="mt-4 text-lg text-gray-700 max-w-sm">Read and share great ideas from remarkable writers.</p>
+                <h1 style="font-size:5rem; font-weight:900; line-height:1; letter-spacing:-0.04em; color:#111827; font-family:Georgia,'Times New Roman',serif;">Human<br>stories &amp;<br>ideas</h1>
+                <p style="margin-top:1.25rem; font-size:1.15rem; color:#374151; max-width:26rem;">A place to read, write, and deepen your understanding of the world.</p>
                 @guest
-                <a href="{{ route('register') }}" class="mt-6 inline-block px-7 py-3 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-700 transition text-sm">
+                <a href="{{ route('register') }}" style="margin-top:1.75rem; display:inline-block; padding:0.85rem 2rem; background:#111827; color:#fff; border-radius:9999px; font-weight:600; font-size:0.95rem; text-decoration:none;">
                     Start reading
                 </a>
                 @endguest
             </div>
-            <div class="hidden sm:block text-gray-900 opacity-10">
-                <svg width="200" height="200" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            <div style="opacity:0.12;">
+                <svg width="220" height="220" viewBox="0 0 200 200" fill="none">
+                    <circle cx="100" cy="100" r="90" stroke="#111827" stroke-width="4" fill="none"/>
+                    <path d="M30 100 C50 40 80 20 100 100 C120 180 150 160 170 100" stroke="#111827" stroke-width="4" fill="none"/>
+                    <circle cx="100" cy="100" r="10" fill="#111827"/>
                 </svg>
             </div>
         </div>

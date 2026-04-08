@@ -32,8 +32,7 @@ class DatabaseSeeder extends Seeder
         ];
         
         foreach ($categories as $categoryName) {
-            Category::create(['name' => $categoryName]);
-            
+            Category::firstOrCreate(['name' => $categoryName]);
         }
         
         User::factory(10)->create();

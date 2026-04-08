@@ -17,6 +17,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // Search
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 
+// Create post (must be before the slug route to avoid "create" being matched as a slug)
+Route::get('/posts/create', [PostController::class, 'create'])->middleware(['auth', 'verified'])->name('posts.create');
+
 // Public post reading
 Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 
@@ -34,7 +37,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Post write/edit/delete
-    Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
     Route::get('/posts/{post:slug}/edit', [PostController::class, 'edit'])->name('posts.edit');
     Route::put('/posts/{post:slug}', [PostController::class, 'update'])->name('posts.update');
