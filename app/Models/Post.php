@@ -52,6 +52,13 @@ class Post extends Model
         return $this->belongsToMany(Tag::class, 'post_tag');
     }
 
+    public function getImageUrlAttribute(): ?string
+    {
+        if (!$this->image) return null;
+        if (str_starts_with($this->image, 'http')) return $this->image;
+        return \Illuminate\Support\Facades\Storage::url($this->image);
+    }
+
     public function getReadingTimeAttribute(): int
     {
         return (int) ceil(str_word_count(strip_tags($this->content)) / 200) ?: 1;

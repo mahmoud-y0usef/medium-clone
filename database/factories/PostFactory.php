@@ -21,7 +21,7 @@ class PostFactory extends Factory
         $title = fake()->sentence();
         $slug = str()->slug($title);
         $content = fake()->paragraphs(5, true);
-        $image = fake()->imageUrl();
+        $image = 'https://flowbite.com/docs/images/blog/image-1.jpg';
         $category_id = Category::inRandomOrder()->first()->id;
         $user_id = \App\Models\User::inRandomOrder()->first()?->id ?? 1;
         $published_at = fake()->optional()->dateTime();

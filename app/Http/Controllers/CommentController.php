@@ -17,7 +17,7 @@ class CommentController extends Controller
             'body'    => $request->body,
         ]);
 
-        return back()->with('success', 'تم إضافة التعليق.');
+        return back()->with('success', 'Comment added.');
     }
 
     public function destroy(Comment $comment)
@@ -25,6 +25,6 @@ class CommentController extends Controller
         $this->authorize('delete', $comment);
         $comment->delete();
 
-        return back()->with('success', 'تم حذف التعليق.');
+        return back()->with('success', 'Comment deleted.');
     }
 }

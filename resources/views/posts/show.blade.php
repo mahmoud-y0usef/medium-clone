@@ -11,7 +11,7 @@
 
         {{-- Cover Image --}}
         @if($post->image)
-            <img src="{{ Storage::url($post->image) }}" alt="{{ $post->title }}"
+                <img src="{{ $post->image_url }}" alt="{{ $post->title }}"
                  class="w-full h-64 object-cover rounded-xl mb-8">
         @endif
 
@@ -42,7 +42,7 @@
                 <div>
                     <p class="font-semibold text-gray-900 text-sm">{{ $post->user->name }}</p>
                     <p class="text-xs text-gray-400">
-                        {{ $post->published_at?->format('M d, Y') }} · {{ $post->reading_time }} دقيقة للقراءة
+                        {{ $post->published_at?->format('M d, Y') }} · {{ $post->reading_time }} min read
                     </p>
                 </div>
             </a>
@@ -56,21 +56,21 @@
                                    {{ auth()->user()->isFollowing($post->user)
                                       ? 'border-gray-300 text-gray-600 hover:bg-gray-50'
                                       : 'bg-gray-900 text-white border-gray-900 hover:bg-gray-700' }}">
-                            {{ auth()->user()->isFollowing($post->user) ? 'إلغاء المتابعة' : 'متابعة' }}
+                            {{ auth()->user()->isFollowing($post->user) ? 'Unfollow' : 'Follow' }}
                         </button>
                     </form>
                 @else
                     <div class="ms-auto flex gap-2">
                         <a href="{{ route('posts.edit', $post->slug) }}"
                            class="px-4 py-1.5 rounded-full text-sm font-medium border border-gray-300 text-gray-600 hover:bg-gray-50 transition">
-                            تعديل
+                            Edit
                         </a>
                         <form action="{{ route('posts.destroy', $post->slug) }}" method="POST"
-                              onsubmit="return confirm('هل أنت متأكد من حذف هذا المقال؟')">
+                              onsubmit="return confirm('Are you sure you want to delete this post?')">
                             @csrf @method('DELETE')
                             <button type="submit"
                                 class="px-4 py-1.5 rounded-full text-sm font-medium border border-red-300 text-red-600 hover:bg-red-50 transition">
-                                حذف
+                                Delete
                             </button>
                         </form>
                     </div>
@@ -108,7 +108,7 @@
                         <svg class="w-5 h-5" fill="{{ $isBookmarked ? 'currentColor' : 'none' }}" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
                         </svg>
-                        <span class="font-medium text-sm">{{ $isBookmarked ? 'محفوظ' : 'حفظ' }}</span>
+                        <span class="font-medium text-sm">{{ $isBookmarked ? 'Saved' : 'Save' }}</span>
                     </button>
                 </form>
             @else
@@ -116,7 +116,7 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                     </svg>
-                    {{ $post->likes->count() }} إعجاب
+                    {{ $post->likes->count() }} likes
                 </div>
             @endauth
         </div>
@@ -124,28 +124,28 @@
         {{-- Comments Section --}}
         <div class="mt-12 pt-8 border-t border-gray-200">
             <h2 class="text-xl font-bold text-gray-900 mb-6">
-                التعليقات ({{ $post->comments->count() }})
+                Responses ({{ $post->comments->count() }})
             </h2>
 
             @auth
                 <form action="{{ route('comments.store', $post) }}" method="POST" class="mb-8">
                     @csrf
                     <div>
-                        <textarea name="body" rows="3" placeholder="اكتب تعليقاً..."
+                        <textarea name="body" rows="3" placeholder="Write a response..."
                             class="block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-lg shadow-sm resize-none">{{ old('body') }}</textarea>
                         @error('body') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
                     </div>
                     <div class="mt-2 flex justify-end">
                         <button type="submit"
                             class="px-5 py-2 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-700 transition">
-                            نشر التعليق
+                            Post
                         </button>
                     </div>
                 </form>
             @else
                 <div class="mb-8 p-4 bg-gray-50 rounded-lg text-sm text-gray-500 text-center">
-                    <a href="{{ route('login') }}" class="text-gray-900 font-medium hover:underline">سجّل دخولك</a>
-                    للمشاركة في النقاش.
+                    <a href="{{ route('login') }}" class="text-gray-900 font-medium hover:underline">Sign in</a>
+                    to join the discussion.
                 </div>
             @endauth
 
@@ -166,7 +166,7 @@
                         @if(auth()->id() === $comment->user_id)
                             <form action="{{ route('comments.destroy', $comment) }}" method="POST">
                                 @csrf @method('DELETE')
-                                <button type="submit" class="text-gray-300 hover:text-red-500 transition" title="حذف">
+                                <button type="submit" class="text-gray-300 hover:text-red-500 transition" title="Delete">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                                     </svg>
@@ -176,7 +176,7 @@
                     @endauth
                 </div>
             @empty
-                <p class="text-gray-400 text-sm text-center py-8">لا توجد تعليقات بعد. كن أول من يعلّق!</p>
+                <p class="text-gray-400 text-sm text-center py-8">No responses yet. Be the first to comment!</p>
             @endforelse
         </div>
     </div>

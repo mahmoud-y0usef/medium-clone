@@ -10,9 +10,9 @@
             <div class="flex-1">
                 <h1 class="text-2xl font-bold text-gray-900">{{ $user->name }}</h1>
                 <div class="flex items-center gap-4 mt-2 text-sm text-gray-500">
-                    <span>{{ $user->followers()->count() }} متابع</span>
-                    <span>{{ $user->following()->count() }} يتابع</span>
-                    <span>{{ $user->posts()->whereNotNull('published_at')->count() }} مقال</span>
+                    <span>{{ $user->followers()->count() }} followers</span>
+                    <span>{{ $user->following()->count() }} following</span>
+                    <span>{{ $user->posts()->whereNotNull('published_at')->count() }} stories</span>
                 </div>
                 @auth
                     @if(auth()->id() !== $user->id)
@@ -23,13 +23,13 @@
                                        {{ $isFollowing
                                           ? 'border-gray-300 text-gray-600 hover:bg-gray-50'
                                           : 'bg-gray-900 text-white border-gray-900 hover:bg-gray-700' }}">
-                                {{ $isFollowing ? 'إلغاء المتابعة' : 'متابعة' }}
+                                {{ $isFollowing ? 'Unfollow' : 'Follow' }}
                             </button>
                         </form>
                     @else
                         <a href="{{ route('posts.create') }}"
                            class="mt-4 inline-block px-5 py-2 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-700 transition">
-                            + كتابة مقال جديد
+                            + New Story
                         </a>
                     @endif
                 @endauth
@@ -37,12 +37,12 @@
         </div>
 
         {{-- Posts --}}
-        <h2 class="text-lg font-semibold text-gray-800 mb-4">مقالات {{ $user->name }}</h2>
+        <h2 class="text-lg font-semibold text-gray-800 mb-4">Stories by {{ $user->name }}</h2>
 
         @forelse($posts as $post)
             @include('components.post-card', ['post' => $post])
         @empty
-            <p class="text-center text-gray-400 py-16">لا توجد مقالات منشورة بعد.</p>
+            <p class="text-center text-gray-400 py-16">No published stories yet.</p>
         @endforelse
 
         <div class="mt-6">

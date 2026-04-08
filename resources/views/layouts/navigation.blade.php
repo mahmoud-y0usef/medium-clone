@@ -13,7 +13,7 @@
                 <form action="{{ route('search') }}" method="GET" class="hidden sm:flex items-center ms-6">
                     <div class="relative">
                         <input type="text" name="q" value="{{ request('q') }}"
-                            placeholder="بحث..."
+                            placeholder="Search..."
                             class="pl-4 pr-8 py-1.5 text-sm border border-gray-300 rounded-full focus:outline-none focus:border-gray-500 bg-gray-50 w-56">
                         <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -32,7 +32,7 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                         </svg>
-                        كتابة
+                        Write
                     </a>
 
                     <x-dropdown align="right" width="48">
@@ -55,20 +55,20 @@
                                 {{ __('Dashboard') }}
                             </x-dropdown-link>
                             <x-dropdown-link :href="route('users.show', Auth::user())">
-                                {{ __('ملفي الشخصي') }}
+                                {{ __('My Profile') }}
                             </x-dropdown-link>
                             <x-dropdown-link :href="route('bookmarks.index')">
-                                {{ __('المقالات المحفوظة') }}
+                                {{ __('Saved Stories') }}
                             </x-dropdown-link>
                             <x-dropdown-link :href="route('profile.edit')">
-                                {{ __('الإعدادات') }}
+                                {{ __('Settings') }}
                             </x-dropdown-link>
                             <div class="border-t border-gray-100"></div>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault(); this.closest('form').submit();">
-                                    {{ __('تسجيل الخروج') }}
+                                    {{ __('Sign out') }}
                                 </x-dropdown-link>
                             </form>
                         </x-slot>
@@ -76,11 +76,11 @@
                 @else
                     <a href="{{ route('login') }}"
                        class="text-sm font-medium text-gray-600 hover:text-gray-900 transition">
-                        تسجيل الدخول
+                        Sign in
                     </a>
                     <a href="{{ route('register') }}"
                        class="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-full hover:bg-gray-700 transition">
-                        ابدأ الكتابة
+                        Get started
                     </a>
                 @endauth
             </div>
@@ -101,10 +101,10 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                الرئيسية
+                Home
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('search')">
-                بحث
+                Search
             </x-responsive-nav-link>
         </div>
 
@@ -116,15 +116,15 @@
             </div>
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('dashboard')">Dashboard</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('posts.create')">كتابة مقال</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('bookmarks.index')">المقالات المحفوظة</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('users.show', Auth::user())">ملفي الشخصي</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('profile.edit')">الإعدادات</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('posts.create')">Write</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('bookmarks.index')">Saved Stories</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('users.show', Auth::user())">My Profile</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('profile.edit')">Settings</x-responsive-nav-link>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <x-responsive-nav-link :href="route('logout')"
                         onclick="event.preventDefault(); this.closest('form').submit();">
-                        تسجيل الخروج
+                        Sign out
                     </x-responsive-nav-link>
                 </form>
             </div>
@@ -132,8 +132,8 @@
         @else
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="space-y-1">
-                <x-responsive-nav-link :href="route('login')">تسجيل الدخول</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('register')">إنشاء حساب</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('login')">Sign in</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('register')">Create account</x-responsive-nav-link>
             </div>
         </div>
         @endauth

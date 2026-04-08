@@ -72,7 +72,7 @@ class PostController extends Controller
         }
 
         return redirect()->route('posts.show', $post->slug)
-            ->with('success', 'تم نشر المقال بنجاح!');
+            ->with('success', 'Post published successfully!');
     }
 
     public function show(Post $post)
@@ -140,7 +140,7 @@ class PostController extends Controller
         }
 
         return redirect()->route('posts.show', $post->slug)
-            ->with('success', 'تم تحديث المقال بنجاح!');
+            ->with('success', 'Post updated successfully!');
     }
 
     public function destroy(Post $post)
@@ -152,6 +152,6 @@ class PostController extends Controller
         }
         $post->delete();
 
-        return redirect()->route('dashboard')->with('success', 'تم حذف المقال.');
+        return redirect()->route('dashboard')->with('success', 'Post deleted.');
     }
 }
