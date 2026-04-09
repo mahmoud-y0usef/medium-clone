@@ -28,11 +28,11 @@
                 <nav style="display: flex; align-items: center; gap: 1.25rem;">
                     <a href="#" style="font-size: 0.875rem; color: #374151; text-decoration: none; white-space: nowrap;">Our story</a>
                     <a href="#" style="font-size: 0.875rem; color: #374151; text-decoration: none; white-space: nowrap;">Membership</a>
-                    <a href="{{ route('login') }}" style="font-size: 0.875rem; color: #374151; text-decoration: none; white-space: nowrap;">Write</a>
-                    <a href="{{ route('login') }}" style="font-size: 0.875rem; color: #374151; text-decoration: none; white-space: nowrap;">Sign in</a>
-                    <a href="{{ route('register') }}" style="font-size: 0.875rem; font-weight: 500; color: #fff; background: #111827; padding: 0.5rem 1.25rem; border-radius: 9999px; text-decoration: none; white-space: nowrap;">
+                    <button onclick="openModal('register')" style="background:none; border:none; padding:0; font-size: 0.875rem; color: #374151; cursor:pointer; white-space: nowrap; font-family:inherit;">Write</button>
+                    <button onclick="openModal('login')"    style="background:none; border:none; padding:0; font-size: 0.875rem; color: #374151; cursor:pointer; white-space: nowrap; font-family:inherit;">Sign in</button>
+                    <button onclick="openModal('register')" style="font-size: 0.875rem; font-weight: 500; color: #fff; background: #111827; padding: 0.5rem 1.25rem; border-radius: 9999px; text-decoration: none; white-space: nowrap; border:none; cursor:pointer; font-family:inherit;">
                         Get started
-                    </a>
+                    </button>
                 </nav>
             </div>
         </header>
