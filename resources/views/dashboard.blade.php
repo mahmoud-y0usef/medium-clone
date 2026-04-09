@@ -14,22 +14,71 @@
                 @endif
 
                 <!-- Category tabs -->
-                <div class="border-b border-gray-200 mb-6 overflow-x-auto">
-                    <div class="flex text-sm font-medium gap-0.5 pb-0">
-                        <a href="{{ route('dashboard') }}"
-                           class="px-4 py-2.5 whitespace-nowrap border-b-2 transition
-                                  {{ !request('category') ? 'border-gray-900 text-gray-900 font-semibold' : 'border-transparent text-gray-500 hover:text-gray-700' }}">
-                            For you
-                        </a>
-                        @foreach($categories as $category)
+                <div style="position:relative; margin-bottom:1.5rem;">
+                    <!-- Left fade + arrow -->
+                    <div id="tab-left" onclick="scrollTabs(-160)"
+                         style="display:none; position:absolute; left:0; top:0; bottom:1px; width:48px; z-index:2; cursor:pointer; align-items:center; justify-content:flex-start;
+                                background:linear-gradient(to right, #fff 55%, transparent);">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                    </div>
+                    <!-- Right fade + arrow -->
+                    <div id="tab-right" onclick="scrollTabs(160)"
+                         style="display:none; position:absolute; right:0; top:0; bottom:1px; width:48px; z-index:2; cursor:pointer; align-items:center; justify-content:flex-end;
+                                background:linear-gradient(to left, #fff 55%, transparent);">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                    </div>
+
+                    <!-- Scrollable tab strip (no scrollbar) -->
+                    <div id="tab-strip" style="overflow-x:auto; scrollbar-width:none; border-bottom:1px solid #e5e7eb;"
+                         onscroll="updateTabArrows()">
+                        <style>#tab-strip::-webkit-scrollbar{display:none}</style>
+                        <div style="display:flex; font-size:0.875rem; font-weight:500; gap:0; white-space:nowrap;">
+                            <a href="{{ route('dashboard') }}"
+                               style="padding:0.6rem 1rem; display:inline-block; border-bottom:2px solid {{ !request('category') ? '#111827' : 'transparent' }};
+                                      color:{{ !request('category') ? '#111827' : '#6b7280' }}; font-weight:{{ !request('category') ? '600' : '400' }};
+                                      text-decoration:none; transition:color .15s;"
+                               onmouseover="if(!this.style.borderBottomColor.includes('111'))this.style.color='#374151'"
+                               onmouseout="if(!this.style.borderBottomColor.includes('111'))this.style.color='#6b7280'">
+                                For you
+                            </a>
+                            @foreach($categories as $category)
                             <a href="{{ route('dashboard', ['category' => $category->id]) }}"
-                               class="px-4 py-2.5 whitespace-nowrap border-b-2 transition
-                                      {{ request('category') == $category->id ? 'border-gray-900 text-gray-900 font-semibold' : 'border-transparent text-gray-500 hover:text-gray-700' }}">
+                               style="padding:0.6rem 1rem; display:inline-block; border-bottom:2px solid {{ request('category') == $category->id ? '#111827' : 'transparent' }};
+                                      color:{{ request('category') == $category->id ? '#111827' : '#6b7280' }}; font-weight:{{ request('category') == $category->id ? '600' : '400' }};
+                                      text-decoration:none; transition:color .15s;"
+                               onmouseover="if(!this.style.borderBottomColor.includes('111'))this.style.color='#374151'"
+                               onmouseout="if(!this.style.borderBottomColor.includes('111'))this.style.color='#6b7280'">
                                 {{ $category->name }}
                             </a>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
                 </div>
+
+                <script>
+                    const strip = document.getElementById('tab-strip');
+                    const btnL  = document.getElementById('tab-left');
+                    const btnR  = document.getElementById('tab-right');
+
+                    function updateTabArrows() {
+                        const atStart = strip.scrollLeft <= 4;
+                        const atEnd   = strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 4;
+                        btnL.style.display = atStart ? 'none'  : 'flex';
+                        btnR.style.display = atEnd   ? 'none'  : 'flex';
+                    }
+                    function scrollTabs(by) {
+                        strip.scrollBy({ left: by, behavior: 'smooth' });
+                    }
+
+                    // Scroll active tab into view on load
+                    document.addEventListener('DOMContentLoaded', () => {
+                        updateTabArrows();
+                        const active = strip.querySelector('[style*="border-bottom:2px solid #111"]');
+                        if (active) active.scrollIntoView({ inline: 'nearest', block: 'nearest' });
+                        // Show right arrow if overflowing
+                        if (strip.scrollWidth > strip.clientWidth) btnR.style.display = 'flex';
+                    });
+                </script>
 
                 <!-- Posts -->
                 @forelse($posts as $post)
