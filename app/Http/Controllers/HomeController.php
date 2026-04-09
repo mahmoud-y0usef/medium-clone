@@ -4,16 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Post::with(['user', 'category', 'likes'])
-            ->whereNotNull('published_at')
-            ->orderBy('published_at', 'DESC');
+        if (Auth::check()) {
+            return redirect()->route('dashboard');
+        }
 
-        $posts = $query->paginate(12);
+        $posts = Post::with(['user', 'category', 'likes'])
+            ->whereNotNull('published_at')
+            ->orderBy('published_at', 'DESC')
+            ->paginate(12);
 
         return view('home', compact('posts'));
     }

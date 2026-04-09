@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-editor-layout>
     <x-slot name="title">Write a new story</x-slot>
 
     {{-- Top action bar --}}
@@ -77,7 +77,7 @@
             </div>
         </form>
     </div>
-</x-app-layout>
+</x-editor-layout>
 
 @push('styles')
 <link href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css" rel="stylesheet">
