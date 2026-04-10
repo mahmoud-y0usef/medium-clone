@@ -7,6 +7,7 @@ A full-featured publishing platform built with Laravel 12, inspired by Medium.co
 ## Table of Contents
 
 - [Overview](#overview)
+- [Screenshots](#screenshots)
 - [Tech Stack](#tech-stack)
 - [Features](#features)
 - [Project Structure](#project-structure)
@@ -23,6 +24,25 @@ A full-featured publishing platform built with Laravel 12, inspired by Medium.co
 ## Overview
 
 This project replicates the core experience of Medium.com: a clean reading and writing interface, topic-based browsing, user follows, post reactions, bookmarks, comments, and a personal statistics dashboard. The landing page is a marketing page only — no content is visible until an account is created.
+
+---
+
+## Screenshots
+
+**Landing Page**
+![Landing Page](view1.png)
+
+**Dashboard Feed**
+![Dashboard Feed](view2.gif)
+
+**Onboarding — Topic Picker**
+![Onboarding](view3.png)
+
+**Story Editor — Publish Panel**
+![Story Editor](view4.png)
+
+**Post Page**
+![Post Page](view5.png)
 
 ---
 
